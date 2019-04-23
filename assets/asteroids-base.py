@@ -63,3 +63,21 @@ try:
         
 finally:
     pygame.quit()
+all_sprites = pygame.sprite.Group()
+all_sprites.add(player)
+
+class Player(pygame.sprite.Sprite):
+    def _init_(self):
+        pygame.sprite.Sprite._init_(self)
+        player_img = pygame.image.load(path.join(img_dir, "playerShip1_orange.png")).convert()
+        self.image = player_img
+        self.image = player_img
+        self.img = pygame.transform.scale(player_img, (50,38))
+        self.image.set_colorkey(BLACK)
+        self.rect = self.image.get_rect()
+        self.rect.centerx = WIDTH / 2
+        self.rect.bottom = HEIGHT - 10
+        screen.full (BLACK)
+        screen.blit(background, background_rect)
+        all.sprites.draw(screen)
+        pygame.display.flip()
