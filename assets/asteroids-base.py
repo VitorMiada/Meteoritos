@@ -67,8 +67,8 @@ all_sprites = pygame.sprite.Group()
 all_sprites.add(player)
 
 class Player(pygame.sprite.Sprite):
-    def _init_(self):
-        pygame.sprite.Sprite._init_(self)
+    def __init__(self):
+        pygame.sprite.Sprite.__init__(self)
         player_img = pygame.image.load(path.join(img_dir, "playerShip1_orange.png")).convert()
         self.image = player_img
         self.image = player_img
@@ -81,3 +81,18 @@ class Player(pygame.sprite.Sprite):
         screen.blit(background, background_rect)
         all.sprites.draw(screen)
         pygame.display.flip()
+        self.rect.centerx = WIDTH / 2
+        self.rect.bottom = HEIGHT - 10
+        self.speedx = 0
+        if event.type == pygame.QUIT:
+            running = False
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_LEFT:
+                player.speedx = -8
+            if event.key == pygame.K_RIGHT:
+                player.speedx = 8
+        if event.type == pygame.KEYUP:
+            if event.key == pygame.K_LEFT:
+                player.speedx = 0
+            if event.key == pygame.K_RIGHT:
+                player.speedx = 0
