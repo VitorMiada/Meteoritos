@@ -71,13 +71,12 @@ class Player(pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self)
         player_img = pygame.image.load(path.join(img_dir, "playerShip1_orange.png")).convert()
         self.image = player_img
-        self.image = player_img
         self.img = pygame.transform.scale(player_img, (50,38))
         self.image.set_colorkey(BLACK)
         self.rect = self.image.get_rect()
         self.rect.centerx = WIDTH / 2
         self.rect.bottom = HEIGHT - 10
-        screen.full (BLACK)
+        screen.fill (BLACK)
         screen.blit(background, background_rect)
         all.sprites.draw(screen)
         pygame.display.flip()
@@ -96,3 +95,25 @@ class Player(pygame.sprite.Sprite):
                 player.speedx = 0
             if event.key == pygame.K_RIGHT:
                 player.speedx = 0
+            self.rect.centerx = WIDTH / 2
+            self.rect.bottom = HEIGHT - 10
+            self.speedx = 0
+        def update(self):
+            self.rect.x += self.speedx
+            if self.rect.right > WIDTH:
+                self.rect.left = WIDTH
+            if self.rect.left < 0:
+                self.rect.left = 0
+            if event.type ==pygame.KEYUP:
+                if event.key == pygame.K_LEFT:
+                    player.speedx = 0
+                if event.key == pygame.K_RIGHT:
+                    player.speedx = 0
+        all.sprites.update()
+pygame.display.set_caption("Navinha")
+clock = pygame.time.Clock()
+background = pygame.image.load(path.join(img_dir, 'starfield.png')).convert()
+background_rect = background.get_rect()
+running = True
+while running:
+    clock.tick(FPS)
